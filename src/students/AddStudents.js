@@ -2,34 +2,43 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function AddUser() {
+export default function AddStudent() {
   let navigate = useNavigate();
 
-  const [user, setUser] = useState({
+  const [student, setStudent] = useState({
     name: "",
     username: "",
     email: "",
+    campus_location: "",
+    program: ""
   });
 
-  const { name, username, email } = user;
+  const { name, username, email, campus_location, program } = student;
 
   const onInputChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    setStudent({ ...student, [e.target.name]: e.target.value });
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:8080/user", user);
-    navigate("/");
+    await axios.post("http://localhost:8080/student", student);
+    navigate("/Student_Registry");
   };
 
   return (
     <div className="container">
       <div className="row">
         <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
-          <h2 className="text-center m-4">Register User</h2>
-
+       
+          <h2 className="text-center m-4">Register Student</h2>
+          <div>
+          <img id="image"
+            src="https://keyin.com/assets/img/logo-keyin.svg"
+            alt="fridge"
+          />
+          </div><br></br>
           <form onSubmit={(e) => onSubmit(e)}>
+         
             <div className="mb-3">
               <label htmlFor="Name" className="form-label">
                 Name
@@ -69,6 +78,32 @@ export default function AddUser() {
                 onChange={(e) => onInputChange(e)}
               />
             </div>
+            <div className="mb-3">
+              <label htmlFor="Campus_Location" className="form-label">
+                Campus Location
+              </label>
+              <input
+                type={"text"}
+                className="form-control"
+                placeholder="Enter Campus Location"
+                name="campus_location"
+                value={campus_location}
+                onChange={(e) => onInputChange(e)}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="Program" className="form-label">
+                Program
+              </label>
+              <input
+                type={"text"}
+                className="form-control"
+                placeholder="Enter Enrolment Program"
+                name="program"
+                value={program}
+                onChange={(e) => onInputChange(e)}
+              />
+            </div>
             <button type="submit" className="btn btn-outline-primary">
               Submit
             </button>
@@ -76,10 +111,19 @@ export default function AddUser() {
               Cancel
             </Link>
           </form>
+          <Link className="btn btn-primary my-2" to={"/Student_Registry"}>
+            Student Registry
+          </Link>
+          <br/>
+          <Link className="btn btn-primary my-2" to={"/Search"}>
+            Back to Search
+            </Link>
+          <br/>
           <Link className="btn btn-primary my-2" to={"/"}>
             Back to Home
-          </Link>
+            </Link>
         </div>
+       
       </div>
     </div>
   );

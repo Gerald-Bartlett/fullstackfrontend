@@ -1,14 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useState, useEffect, clockState } from 'react';
 
-export default function Navbar() {
+export default function Navbar(props) {
+
+  
+
   return (
     <div>
+      
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
-            Full Stack CRUD Application
+            Final Sprint Team 1 Keyin College Student Registry
           </Link>
+          
           <button
             className="navbar-toggler"
             type="button"
@@ -20,12 +26,11 @@ export default function Navbar() {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-
-          <Link className="btn btn-outline-light" to="/adduser">
-            Register 
-          </Link>
+          {/* <div  style={{ fontSize: "55px", margin: "60px" }}>{clockState}</div> */}
+         
         </div>
       </nav>
     </div>
   );
-}
+  }
+

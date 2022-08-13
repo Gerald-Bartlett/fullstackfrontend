@@ -2,44 +2,52 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
-export default function EditUser() {
+export default function EditStudent() {
   let navigate = useNavigate();
 
   const { id } = useParams();
 
-  const [user, setUser] = useState({
+  const [student, setStudent] = useState({
     name: "",
     username: "",
     email: "",
+    campus_location: "",
+    program: ""
   });
 
-  const { name, username, email } = user;
+  const { name, username, email, campus_location, program } = student;
 
   const onInputChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    setStudent({ ...student, [e.target.name]: e.target.value });
   };
 
   useEffect(() => {
-    loadUser();
+    loadStudent();
   }, []);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.put(`http://localhost:8080/user/${id}`, user);
-    navigate("/");
+    await axios.put(`http://localhost:8080/student/${id}`, student);
+    navigate("/Student_Registry");
   };
 
-  const loadUser = async () => {
-    const result = await axios.get(`http://localhost:8080/user/${id}`);
-    setUser(result.data);
+  const loadStudent = async () => {
+    const result = await axios.get(`http://localhost:8080/student/${id}`);
+    setStudent(result.data);
   };
 
   return (
     <div className="container">
       <div className="row">
         <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
-          <h2 className="text-center m-4">Edit User</h2>
-
+          <h2 className="text-center m-4">Edit Student</h2>
+          
+          <div>
+          <img id="image"
+            src="https://keyin.com/assets/img/logo-keyin.svg"
+            alt="fridge"
+          />
+          </div><br></br>
           <form onSubmit={(e) => onSubmit(e)}>
             <div className="mb-3">
               <label htmlFor="Name" className="form-label">
@@ -80,11 +88,41 @@ export default function EditUser() {
                 onChange={(e) => onInputChange(e)}
               />
             </div>
+            <div className="mb-3">
+              <label htmlFor="Campus_Location" className="form-label">
+                Campus Location
+              </label>
+              <input
+                type={"text"}
+                className="form-control"
+                placeholder="Enter Campus Location"
+                name="campus_location"
+                value={campus_location}
+                onChange={(e) => onInputChange(e)}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="Program" className="form-label">
+                Program
+              </label>
+              <input
+                type={"text"}
+                className="form-control"
+                placeholder="Enter Enrolment Program"
+                name="program"
+                value={program}
+                onChange={(e) => onInputChange(e)}
+              />
+            </div>
             <button type="submit" className="btn btn-outline-primary">
               Submit
             </button>
-            <Link className="btn btn-outline-danger mx-2" to="/">
+            <Link className="btn btn-outline-danger mx-2" to="/Student_Registry">
               Cancel
+            </Link>
+            <br/><br/>
+            <Link className="btn btn-primary my-2" to="/Student_Registry">
+             Back To Student Registry
             </Link>
           </form>
         </div>
