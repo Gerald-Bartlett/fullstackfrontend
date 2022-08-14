@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { useState, useEffect } from "react";
 import Results from "./Results";
 import { useNavigate } from "react-router";
 import { Logger } from "../logger/logger";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Search = (props) => {
   const [search, setSearch] = useState("");

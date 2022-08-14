@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 //will need many more imports including useEffect and useState
@@ -122,7 +123,7 @@ import { useNavigate } from "react-router-dom";
       {error ? <p className="error">{error}</p> : null}
       <div>
         <p>
-          Don't have an account? <Link to="/User_Registry"> Register here.</Link>
+          Don't have an account? <Link to="/User_Register"> Register here.</Link>
         </p>
       </div>
     </div>

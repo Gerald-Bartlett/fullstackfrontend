@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useState, useEffect, clockState } from 'react';
+// import { useState, useEffect, clockState } from 'react';
 
 export default function Navbar(props) {
 
