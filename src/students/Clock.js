@@ -10,7 +10,7 @@ function Clock() {
     }, 1000);
   }, []);
 
-  return <div style={{ fontSize: "40px", margin: "10px" }}>{clockState}</div>;
+  return <div style={{ fontSize: "30px", margin: "10px" }}>{clockState}</div>;
 }
 
 export default Clock;
