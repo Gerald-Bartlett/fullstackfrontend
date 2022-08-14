@@ -3,22 +3,24 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 
 export default function User_Registry() {
-  
   const [users, setUsers] = useState([]);
+
   // eslint-disable-next-line no-unused-vars
-  
   const { id } = useParams();
+
   useEffect(() => {
     loadUsers();
   }, []);
-  
+
   const loadUsers = async () => {
-    const result = await axios.get("http://localhost:8080/users");
+    const result = await axios.get("http://localhost:3000/users");
     setUsers(result.data);
   };
+
+  
   
   const deleteUser = async (id) => {
-    await axios.delete(`http://localhost:8080/user/${id}`);
+    await axios.delete(`http://localhost:3000/user/${id}`);
     loadUsers();
   };
   
@@ -46,12 +48,15 @@ export default function User_Registry() {
                 <th scope="row" key={index}>
                   {index + 1}
                 </th>
-                
+               
+               
                 <td>{user.username}</td>
                 <td>{user.password}</td>
+                
                 <td>
                   <Link
-                    className="btn btn-primary mx-2" to={`/viewuser/${user.id}`}
+                    className="btn btn-primary mx-2"
+                    to={`/viewuser/${user.id}`}
                   >
                     View
                   </Link>
@@ -69,15 +74,10 @@ export default function User_Registry() {
                   </button>
                 </td>
               </tr>
+              
             ))}
           </tbody>
         </table>
-        <button id="btn2">
-              <Link className="btn btn-primary my-2" to={"/Search"}>
-              Back to Search
-            </Link>
-            </button>
-            <br/><br/>
         <button id="btn2">
               <Link className="btn btn-primary my-2" to={"/"}>
               Back to Home
@@ -86,4 +86,4 @@ export default function User_Registry() {
       </div>
     </div>
   );
-            }
+}

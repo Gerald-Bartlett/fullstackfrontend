@@ -1,8 +1,8 @@
 // a simple header for the app
 // this needs some work, specific the login/ logout
 
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+// import { Link } from "react-router-dom";
 
 const Header = (props) => {
   //testing code

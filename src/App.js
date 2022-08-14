@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-pascal-case */
 import "./App.css";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./layout/Navbar";
@@ -12,8 +13,7 @@ import Clock from "./students/Clock"
 import AddStudents from "./students/AddStudents";
 import EditStudents from "./students/EditStudents";
 import ViewStudents from "./students/ViewStudents";
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Search from './pages/Search';
 
 function App() {
