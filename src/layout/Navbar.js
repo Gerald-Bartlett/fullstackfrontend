@@ -1,6 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+<<<<<<< HEAD
 // import { useState, useEffect, clockState } from 'react';
+=======
+
+>>>>>>> 8344eaf6eda049b9dd80e394c1aff9f935562f87
 
 export default function Navbar(props) {
 
@@ -26,7 +30,7 @@ export default function Navbar(props) {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          {/* <div  style={{ fontSize: "55px", margin: "60px" }}>{clockState}</div> */}
+          
          
         </div>
       </nav>
