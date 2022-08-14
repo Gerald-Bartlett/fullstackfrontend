@@ -1,109 +1,89 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-// bcrypt is unhappy about react, there are work arounds... to be continued time allowing
-//import bcrypt from "bcryptjs";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Link, useParams } from "react-router-dom";
 
-const User_Registry = () => {
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
-  const [passConfirm, setPassConfirm] = useState("");
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
-
-  class User {
-    constructor(userName, password) {
-      this.userName = userName;
-      this.password = password;
-    }
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    if (userName === "" || password === "" || passConfirm === "") {
-      setError("Please enter a username and password");
-    } else if (password !== passConfirm) {
-      setError("Passwords do not match");
-    } else {
-      setError(null);
-      let user = new User(userName, password);
-      // bcrypt.hash(user.password, 10, (err, hash) => {})
-      // ^^ this is where i would encode the password, unless server side encryption becomes my chosen solution
-      await fetch("http://localhost:3000/users/add", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      }).catch((error) => {
-        window.alert(error);
-        return;
-      });
-      window.alert("User created, returning to login");
-      setUserName("");
-      setPassword("");
-      setPassConfirm("");
-      navigate("/");
-    }
+export default function User_Registry() {
+  
+  const [users, setUsers] = useState([]);
+  // eslint-disable-next-line no-unused-vars
+  
+  const { id } = useParams();
+  useEffect(() => {
+    loadUsers();
+  }, []);
+  
+  const loadUsers = async () => {
+    const result = await axios.get("http://localhost:8080/users");
+    setUsers(result.data);
   };
-
+  
+  const deleteUser = async (id) => {
+    await axios.delete(`http://localhost:8080/user/${id}`);
+    loadUsers();
+  };
+  
   return (
-    
-    <div>
-        <div className="container">
+    <div className="container">
       <div className="py-4">
-      <h1 className="text-center font-weight-light mt-5">
-          
-          </h1>
+      <div>
           <img id="image"
             src="https://keyin.com/assets/img/logo-keyin.svg"
             alt="fridge"
           />
-          </div>
-          <div> <img id="image"
-            src="https://pbs.twimg.com/media/CeVuxsXUIAAuH2T.jpg"
-            alt="fridge"/>
+        </div><br></br>
+        <table className="table border shadow">
+          <thead>
+            <tr>
+              <th scope="col">User Id </th>
+              <th scope="col">Username</th>
+              <th scope="col">Password</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user, index) => (
+              <tr>
+                <th scope="row" key={index}>
+                  {index + 1}
+                </th>
+                
+                <td>{user.username}</td>
+                <td>{user.password}</td>
+                <td>
+                  <Link
+                    className="btn btn-primary mx-2" to={`/viewuser/${user.id}`}
+                  >
+                    View
+                  </Link>
+                  <Link
+                    className="btn btn-outline-primary mx-2"
+                    to={`/edituser/${user.id}`}
+                  >
+                    Edit
+                  </Link>
+                  <button
+                    className="btn btn-danger mx-2"
+                    onClick={() => deleteUser(user.id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <button id="btn2">
+              <Link className="btn btn-primary my-2" to={"/Search"}>
+              Back to Search
+            </Link>
+            </button>
+            <br/><br/>
+        <button id="btn2">
+              <Link className="btn btn-primary my-2" to={"/"}>
+              Back to Home
+            </Link>
+            </button>
       </div>
     </div>
-      <h1>Register Users</h1>
-      <form id="registerForm" onSubmit={handleSubmit}>
-        <label>Username:</label>
-        <input
-          type="text"
-          name="username"
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
-        />
-        <br />
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <br />
-        <label>Confirm Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={passConfirm}
-          onChange={(e) => setPassConfirm(e.target.value)}
-        />
-        <br />
-        <input id="submit" type="submit" value="Register" />
-      </form>
-      {error ? <p className="error">{error}</p> : null}
-      <div>
-        <p>
-          Already have an account? <Link to="/"> Login here.</Link>
-        </p>
-      </div>
-    </div>
-    
   );
-};
-
-export default User_Registry;
+            }

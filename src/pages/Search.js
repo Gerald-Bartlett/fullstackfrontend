@@ -124,7 +124,13 @@ const Search = (props) => {
       </div>
     </div>
       <h1>Search or Add New Student</h1>
-      <Link className="btn btn-primary my-2" to="/addstudent">
+      <Link className="btn btn-primary my-2"  to="/User_Registry" style={{margin:"5px"}}>
+            User Registry 
+          </Link>
+          <Link className="btn btn-primary my-2" to="/Student_Registry" style={{margin:"5px"}}>
+            Student Registry 
+          </Link>
+          <Link className="btn btn-primary my-2" to="/addstudent" style={{margin:"5px"}}>
             Add New Student 
           </Link>
       <form id="searchForm" onSubmit={handleSubmit}>
