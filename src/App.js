@@ -18,7 +18,7 @@ import EditUser from "./Users/EditUser";
 import ViewUser from "./Users/ViewUser";
 import React, { useState } from 'react';
 import Search from './pages/Search';
-import Results from "./pages/Results";
+
 
 function App() {
   const [user, setUser] = useState(null);
@@ -38,7 +38,7 @@ function App() {
           <Route exact path="/User_Registry" element={<User_Registry/>}/>
           
           <Route path="/Search" element={<Search user={user} isLoggedIn={isLoggedIn}/>} />
-          <Route exact path="/Results" element={<Results/>}/>
+          
           <Route exact path="/addStudent" element={<AddStudents />} />
           <Route exact path="/editStudent/:id" element={<EditStudents />} />
           <Route exact path="/viewStudent/:id" element={<ViewStudents />} />
