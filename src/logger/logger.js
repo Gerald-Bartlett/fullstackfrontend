@@ -2,8 +2,8 @@
 // the log collection is a mongo collection
 
 class Message {
-    constructor(user, search, database, time) {
-        this.user = user;
+    constructor(student, search, database, time) {
+        this.student = student;
         this.search = search;
         this.database = database;
         this.time = time;
@@ -15,8 +15,8 @@ class Message {
             this.message = {};
         }
         // method to instantiate a message object
-        create(user, search, database, time) {
-            let message = new Message(user, search, database, time);
+        create(student, search, database, time) {
+            let message = new Message(student, search, database, time);
             return message;
         }
         // this method got shifted to the server

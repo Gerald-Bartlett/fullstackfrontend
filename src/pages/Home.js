@@ -1,86 +1,15 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
-//import axios from "axios";
-import { Link, useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+
+import React from "react";
+
+import { Link } from "react-router-dom";
+
 
 //will need many more imports including useEffect and useState
 
-// export default function Home ()  {
+ export default function Home ()  {
   
 
- const Login = (props) => {
-//   // a useState to store the user object on successful login will be required
-//   // ^^ will also need to be passed forward to the search page
-  const [username, setUserName] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
-
-  //a use effect to ensure the user object is reset to null on returning to the login page
-  useEffect(() => {
-    props.setUser(null);
-    props.setIsLoggedIn(false);
-  }, []);
-
-//   // a function to handle the login form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    // testing comments
-    //console.log(userName);
-    // console.log(password);
-    if (username === "" || password === "") {
-      setError("Please enter a username and password");
-      return
-    }
-//     // code to send value to server to check if user exists
-
-await fetch(`http://localhost:3000/user/${username}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        if (response.status === 200) {
-          // console.log(response);
-          //console.log(response.json())
-          return response.json();
-        } else {
-          setError("User does not exist");
-          return
-        }
-      })
-      .catch((error) => {
-        setError("User does not exist" );
-        return;
-      })
-      .then((data) => {
-        //console.log(data);
-        if (data.password === password) {
-          //console.log("password is correct");
-          // if user exists and passwords match, set user object to the user object
-          props.setUser(username);
-          props.setIsLoggedIn(true);
-          navigate("/Search");
-        } else {
-          setError("Password is incorrect");
-        }
-      })
-      .catch((error) => {
-        setError("User does not exist");
-        return;
-      });
-
-    // early testing code for ensuring React was working
-    // props.setUser(userName);
-    // props.setIsLoggedIn(true);
-    // navigate("/search");
-    // setUserName("");
-    // setPassword("");
-  };
-
+ 
   return (
     <div>
     <div className="container">
@@ -98,42 +27,24 @@ await fetch(`http://localhost:3000/user/${username}`, {
             alt="fridge"/>
       </div>
     </div>
-  
+    <h1>Add New User or Continue on to User Registry</h1>
+      <Link className="btn btn-primary my-2"  to="/User_Registry" style={{margin:"5px"}}>
+            User Registry 
+          </Link>
+          <Link className="btn btn-primary my-2" to="/AddUser" style={{margin:"5px"}}>
+            Add New User 
+          </Link>
     
-      <h1>Login</h1>
-      <form id="registerForm" onSubmit={handleSubmit}>
-        <label>Username:</label>
-        <input
-          type="text"
-          name="username"
-          value={username}
-          onChange={(e) => setUserName(e.target.value)}
-        />
-        <br />
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <br />
-        <input id="submit" type="submit" value="Login" />
-      </form>
-      {error ? <p className="error">{error}</p> : null}
-      <div>
-        <p>
-          Don't have an account? <Link to="/User_Register"> Register here.</Link>
-        </p>
+    
       </div>
-    </div>
+    
     
   );
-  };
+  }
 
-//}
+
 
 
   
     
-   export default Login;
+   

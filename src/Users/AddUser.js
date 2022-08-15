@@ -61,7 +61,7 @@ export default function AddUser() {
                 type={"text"}
                 className="form-control"
                 placeholder="Enter password"
-                name="campus_location"
+                name="password"
                 value={password}
                 onChange={(e) => onInputChange(e)}
               />

@@ -2,6 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 // handles the search results and processes the data for display, limits number of visible result
 // results are displayed very rudimentarily, could increase amount of data displayed and incorporate paging etc...
@@ -52,7 +53,7 @@ const Results = (props) => {
   } else {
     return (
       <div>
-        <h1>{`Search History for ${props.user}`}</h1>
+        <h1>{`Search History for ${props.students}`}</h1>
         {results.map((result) => {
           return (
             <div>
