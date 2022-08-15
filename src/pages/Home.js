@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+//import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
  const Login = (props) => {
 //   // a useState to store the user object on successful login will be required
 //   // ^^ will also need to be passed forward to the search page
-  const [userName, setUserName] = useState("");
+  const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -30,13 +30,13 @@ import { useNavigate } from "react-router-dom";
     // testing comments
     //console.log(userName);
     // console.log(password);
-    if (userName === "" || password === "") {
+    if (username === "" || password === "") {
       setError("Please enter a username and password");
       return
     }
 //     // code to send value to server to check if user exists
 
-    await fetch(`http://localhost:3000/users/${userName}`, {
+await fetch(`http://localhost:3000/user/${username}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -61,7 +61,7 @@ import { useNavigate } from "react-router-dom";
         if (data.password === password) {
           //console.log("password is correct");
           // if user exists and passwords match, set user object to the user object
-          props.setUser(userName);
+          props.setUser(username);
           props.setIsLoggedIn(true);
           navigate("/Search");
         } else {
@@ -106,7 +106,7 @@ import { useNavigate } from "react-router-dom";
         <input
           type="text"
           name="username"
-          value={userName}
+          value={username}
           onChange={(e) => setUserName(e.target.value)}
         />
         <br />

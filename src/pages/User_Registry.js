@@ -13,14 +13,14 @@ export default function User_Registry() {
   }, []);
 
   const loadUsers = async () => {
-    const result = await axios.get("http://localhost:3000/users");
+    const result = await axios.get("http://localhost:8080/users");
     setUsers(result.data);
   };
 
   
   
   const deleteUser = async (id) => {
-    await axios.delete(`http://localhost:3000/user/${id}`);
+    await axios.delete(`http://localhost:8080/user/${id}`);
     loadUsers();
   };
   
@@ -78,6 +78,12 @@ export default function User_Registry() {
             ))}
           </tbody>
         </table>
+        <button id="btn2">
+              <Link className="btn btn-primary my-2" to={"/Search"}>
+              Back to Search
+            </Link>
+            </button>
+
         <button id="btn2">
               <Link className="btn btn-primary my-2" to={"/"}>
               Back to Home

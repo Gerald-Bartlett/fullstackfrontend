@@ -10,7 +10,7 @@ const Results = (props) => {
   const [shortResults, setShortResults] = useState([]);
 
   useEffect(() => {
-    if (props.database === "mongo") {
+    if (props.database === "MySQL") {
       console.log(results[0]);
       let temp = [];
       let number;
@@ -27,22 +27,19 @@ const Results = (props) => {
   }, []);
 
   let i = 0;
-  if (props.database === "postgres") {
+  if (props.database === "MySQL") {
     return (
       <div>
-        <h1> Postgres Results</h1>
+        <h1> MySQL Results</h1>
         {shortResults.map((result) => {
           console.log(result);
           return (
             <div>
-              <h2>{result.business_name}</h2>
+              <h2>{result.name}</h2>
               <p>
-                {`${result.city}`}
+                {`${result.program}`}
                 <br />
-                {result.address}
-                <br />
-                {result.categories}
-                <br />
+                
                 {/* found an error this morning, fixed review_count to be displayed instead of .stars twice :) */}
                 {`Rated ${result.stars} stars across ${result.review_count} reviews.`}
                 <br />
@@ -50,34 +47,6 @@ const Results = (props) => {
             </div>
           );
         })}
-      </div>
-    );
-  } else if (props.database === "mongo") {
-    return (
-      <div>
-        <h1>Results</h1>
-
-        {shortResults.map((result) => {
-          return (
-            <div>
-              <hr />
-              <h3>{result.name}</h3>
-              <div>
-                {`${result.city}, ${result.state}`} <br />
-                {result.address}
-                <br />
-                {result.categories} <br />
-                {`Rating: ${result.stars}/5 based on ${result.review_count} reviews.`}{" "}
-                <br />
-                <hr />
-              </div>
-            </div>
-          );
-        })}
-        <br />
-        {results
-          ? `There are ${results.length} results, up to the first 20 are shown`
-          : null}
       </div>
     );
   } else {

@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+//import axios from "axios";
 // bcrypt is unhappy about react, there are work arounds... to be continued time allowing
 //import bcrypt from "bcryptjs";
 
 const User_Register = () => {
-  const [userName, setUserName] = useState("");
+  const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [passConfirm, setPassConfirm] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   class User {
-    constructor(userName, password) {
-      this.userName = userName;
+    constructor(username, password) {
+      this.username = username;
       this.password = password;
     }
   }
@@ -21,16 +22,16 @@ const User_Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    if (userName === "" || password === "" || passConfirm === "") {
+    if (username === "" || password === "" || passConfirm === "") {
       setError("Please enter a username and password");
     } else if (password !== passConfirm) {
       setError("Passwords do not match");
     } else {
       setError(null);
-      let user = new User(userName, password);
+      let user = new User(username, password);
       // bcrypt.hash(user.password, 10, (err, hash) => {})
       // ^^ this is where i would encode the password, unless server side encryption becomes my chosen solution
-      await fetch("http://localhost:3000/users/add", {
+      await fetch("http://localhost:3000/user/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -72,7 +73,7 @@ const User_Register = () => {
         <input
           type="text"
           name="username"
-          value={userName}
+          value={username}
           onChange={(e) => setUserName(e.target.value)}
         />
         <br />

@@ -83,7 +83,7 @@ export default function Student_Registry() {
               Back to Search
             </Link>
             </button>
-            <br/><br/>
+            
         <button id="btn2">
               <Link className="btn btn-primary my-2" to={"/"}>
               Back to Home
